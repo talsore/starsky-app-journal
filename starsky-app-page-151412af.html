@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>星空体育 · 知识型体育内容探索</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(145deg, #ffdec2 0%, #fce0b6 30%, #fde4cd 70%, #ffdbb5 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.2rem 3rem;
+      color: #2c2a28;
+    }
+
+    .page {
+      max-width: 820px;
+      width: 100%;
+    }
+
+    /* 卡片通用风格 */
+    .card {
+      background: rgba(255, 250, 240, 0.9);
+      backdrop-filter: blur(2px);
+      border-radius: 40px 16px 40px 16px;
+      box-shadow: 0 10px 20px rgba(190, 130, 70, 0.12), 0 4px 8px rgba(150, 100, 50, 0.08);
+      padding: 2.2rem 2.4rem;
+      margin-bottom: 2rem;
+      transition: transform 0.15s ease, box-shadow 0.2s;
+      border: 1px solid rgba(255, 220, 180, 0.6);
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 28px rgba(160, 100, 40, 0.12);
+    }
+
+    /* hero —— 暖色氛围 */
+    .hero {
+      text-align: center;
+      padding: 2.8rem 2rem 2.4rem;
+      background: rgba(255, 245, 225, 0.85);
+      border-radius: 60px 20px 60px 20px;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(235, 185, 130, 0.3);
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 450;
+      letter-spacing: -0.02em;
+      color: #5b3e2b;
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
+      text-shadow: 0 2px 4px rgba(200, 150, 100, 0.2);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #5f4a38;
+      max-width: 600px;
+      margin: 0 auto 1.6rem;
+      line-height: 1.6;
+      font-weight: 350;
+    }
+
+    .hero .tagline {
+      display: inline-block;
+      background: #ebd2b0;
+      color: #4d3626;
+      padding: 0.3rem 1.8rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      border: 1px solid #dbb996;
+    }
+
+    /* 区域标题 */
+    .section-title {
+      font-size: 1.7rem;
+      font-weight: 420;
+      color: #5b3e2a;
+      margin-bottom: 1.2rem;
+      border-left: 8px solid #e9b17b;
+      padding-left: 1.2rem;
+      letter-spacing: -0.3px;
+    }
+
+    .section-sub {
+      color: #6b5542;
+      margin-bottom: 1.8rem;
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+
+    /* 特点网格 */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.4rem;
+      margin-top: 0.8rem;
+    }
+
+    .feature-item {
+      background: rgba(250, 235, 215, 0.6);
+      padding: 1.2rem 1.2rem 1rem;
+      border-radius: 28px 10px 28px 10px;
+      border: 1px solid #e7cfb2;
+      transition: background 0.2s;
+    }
+
+    .feature-item:hover {
+      background: #f6e3cb;
+    }
+
+    .feature-item h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #4a3728;
+      margin-bottom: 0.4rem;
+    }
+
+    .feature-item p {
+      font-size: 0.95rem;
+      color: #5f4b3a;
+      line-height: 1.5;
+    }
+
+    /* 说明区 —— 自然承接 */
+    .explain-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #3f342b;
+    }
+
+    .explain-text a {
+      color: #914f2a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 2px solid #eabe8b;
+      padding-bottom: 1px;
+      transition: border 0.2s, color 0.2s;
+    }
+
+    .explain-text a:hover {
+      color: #623b20;
+      border-bottom-color: #a46e42;
+    }
+
+    .inline-highlight {
+      background: #f7e2ca;
+      padding: 0.1rem 0.4rem;
+      border-radius: 12px;
+      font-weight: 430;
+    }
+
+    /* FAQ 摘要 */
+    .faq-item {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid #e7cfb4;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 520;
+      font-size: 1.05rem;
+      color: #4a3725;
+      margin-bottom: 0.3rem;
+    }
+
+    .faq-a {
+      font-size: 0.95rem;
+      color: #5a493a;
+      line-height: 1.5;
+      padding-left: 0.3rem;
+    }
+
+    .faq-a a {
+      color: #7d4d2e;
+      text-decoration: none;
+      border-bottom: 1px dotted #b3855f;
+    }
+
+    .faq-a a:hover {
+      border-bottom-style: solid;
+      color: #4f301e;
+    }
+
+    /* 底部链接区 */
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem 1.6rem;
+      margin-top: 0.8rem;
+      font-size: 0.95rem;
+    }
+
+    .footer-links span {
+      color: #6b5542;
+    }
+
+    .footer-links a {
+      color: #5f3f28;
+      text-decoration: none;
+      border-bottom: 1px solid #dab58e;
+      padding-bottom: 1px;
+      transition: border 0.2s, color 0.15s;
+      font-weight: 440;
+    }
+
+    .footer-links a:hover {
+      color: #2f1f14;
+      border-bottom-color: #9a6f46;
+    }
+
+    .footnote {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #6d5b49;
+      border-top: 1px solid #eaceb4;
+      padding-top: 1.8rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 600px) {
+      body { padding: 1.2rem 0.9rem; }
+      .card { padding: 1.5rem 1.2rem; }
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
+      .section-title { font-size: 1.4rem; padding-left: 0.8rem; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 420px) {
+      .hero h1 { font-size: 1.7rem; }
+      .hero { padding: 1.8rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- hero 区 -->
+  <div class="hero">
+    <h1>星空体育 · 运动中的知与美</h1>
+    <p>从竞技数据到训练逻辑，从运动心理学到赛事文化——以知识视角理解体育的多元面貌。</p>
+    <div class="tagline">✦ 深度内容 · 理性解读 ✦</div>
+  </div>
+
+  <!-- 优势区：特点卡片 -->
+  <div class="card">
+    <h2 class="section-title">内容视角</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <h3>🏃 运动科学</h3>
+        <p>体能周期、恢复策略、营养基础，用研究支持实践。</p>
+      </div>
+      <div class="feature-item">
+        <h3>📊 赛事与数据</h3>
+        <p>趋势、概率、战术演变——数字背后的体育逻辑。</p>
+      </div>
+      <div class="feature-item">
+        <h3>🧠 心理与认知</h3>
+        <p>压力调节、专注力、团队默契，运动中的心智训练。</p>
+      </div>
+      <div class="feature-item">
+        <h3>🌍 体育文化</h3>
+        <p>项目起源、规则流变、地域特色，体育作为一种社会镜像。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 说明区：自然承接，嵌入链接 -->
+  <div class="card">
+    <h2 class="section-title">不止于比分</h2>
+    <div class="explain-text">
+      <p>当我们谈论体育，常常首先想起胜负与纪录。但体育的魅力远不止于此：一场马拉松的后半程如何分配体能，一次防守反击的决策时机如何形成，不同运动项目的训练哲学为何差异巨大——这些议题构成了体育认知的深层网络。</p>
+      <p style="margin-top: 1rem;">在<a href="https://starsky-app.com">星空体育</a>的内容板块中，我们尝试把这些碎片串联起来：从运动生理学的基础原理，到竞技心理的案例讨论；从团队战术的历史演变，到大众健身的误区辨析。我们相信，对体育的理解越完整，参与和欣赏的体验也会越丰富。</p>
+      <p style="margin-top: 0.8rem;">例如，看似简单的「耐力训练」背后，涉及能量代谢、心率区间、恢复周期等多个变量；而一项运动的规则调整，往往折射出安全、观赏性、公平性之间的权衡。这些主题都值得被更细致地梳理。</p>
+    </div>
+    <div style="margin-top: 1.2rem; background: #eddccc; padding: 0.7rem 1.2rem; border-radius: 40px 8px 40px 8px; display: inline-block; font-size: 0.9rem;">
+      <span style="color:#4f3b2b;">▸ 覆盖跑步、球类、力量训练、户外运动等多领域</span>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要区 -->
+  <div class="card">
+    <h2 class="section-title">常见问题 · 摘要</h2>
+    <div class="faq-item">
+      <div class="faq-q">❓ 体育知识类内容适合哪些人群？</div>
+      <div class="faq-a">运动爱好者、教练、体育专业学生，以及对运动机制好奇的普通锻炼者。内容力求兼顾专业性与可读性。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">❓ 文章会涉及具体训练计划吗？</div>
+      <div class="faq-a">部分主题会给出原则性框架与注意事项，但个体差异较大，建议结合自身情况调整。更多背景讨论可参考<a href="https://starsky-app.com">星空体育</a>的相关专题。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">❓ 内容更新频率如何？</div>
+      <div class="faq-a">保持稳定节奏，每周围绕一个核心主题发布 2~3 篇分析或解读，避免信息过载。</div>
+    </div>
+    <div style="margin-top: 1.2rem; font-size: 0.9rem; color: #5f4836; text-align: right;">
+      <span>—— 更多讨论持续开放 ——</span>
+    </div>
+  </div>
+
+  <!-- 底部链接区 -->
+  <div class="card" style="text-align: center; padding: 1.6rem 1.8rem;">
+    <div class="footer-links">
+      <span>◈</span>
+      <a href="https://starsky-app.com">星空体育</a>
+      <span>◈</span>
+      <a href="#">内容索引</a>
+      <span>◈</span>
+      <a href="#">关于项目</a>
+      <span>◈</span>
+      <a href="#">联系</a>
+    </div>
+    <div class="footnote">
+      基于理性与好奇，探索体育的更多维度。<br>
+      所有内容仅供参考，不构成专业医学或训练建议。
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
